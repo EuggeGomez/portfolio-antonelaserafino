@@ -252,8 +252,17 @@ ul,ol{padding:0;list-style:none}
 .chat .burbuja{font-size:12.5px;padding:8px 10px}
 .msg.desborda::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,rgba(247,245,239,0),var(--papel) 70%)}
 .msg.desborda::before{content:"Leer completo →";position:absolute;left:16px;bottom:14px;z-index:2;font-weight:600;font-size:12.5px;color:var(--terracota)}
+.carrusel{cursor:grab;user-select:none;-webkit-user-select:none}
+.carrusel.arrastrando{cursor:grabbing;scroll-snap-type:none}
+.carrusel.arrastrando .msg{pointer-events:none}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:14px}
+.car-flecha{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(89,18,2,.25);background:var(--papel);color:var(--bordo);
+  font:400 20px/1 var(--serif);cursor:pointer;display:grid;place-items:center;padding:0 0 2px;transition:background .2s,color .2s;
+}
+.car-flecha:hover{background:var(--bordo);color:var(--papel)}
 .dots{display:flex;justify-content:center;gap:6px}
-.dots span{width:6px;height:6px;border-radius:3px;background:#D9D3C2;transition:width .25s,background .25s}
+.dots span{width:8px;height:8px;border-radius:4px;background:#D9D3C2;transition:width .25s,background .25s;cursor:pointer}
 .dots span.on{width:18px;background:var(--ocre)}
 
 /* Pop-up */
@@ -273,6 +282,10 @@ ul,ol{padding:0;list-style:none}
 .lightbox-card .burbuja{font-size:16px}
 .lightbox-card .chat .burbuja{font-size:15px}
 .lightbox-card .msg-head{font-size:13px}
+.lightbox-cerrar{
+  position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(247,245,239,.9);color:var(--bordo);font-size:18px;box-shadow:0 6px 16px rgba(0,0,0,.25);
+}
 .lightbox-hint{color:var(--papel);font-style:italic;font-size:13px}
 
 /* ---------- Mi forma de trabajar ---------- */

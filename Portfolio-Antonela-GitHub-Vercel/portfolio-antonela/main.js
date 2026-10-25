@@ -74,6 +74,41 @@
     };
     car.addEventListener('scroll', function () { window.requestAnimationFrame(marcar); }, { passive: true });
     marcar();
+
+    /* Flechas, puntos clickeables y arrastre con mouse (en compu no hay swipe) */
+    var paso = function () { return cards[0].getBoundingClientRect().width + 12; };
+    var ir = function (dir) { car.scrollBy({ left: dir * paso(), behavior: reduce ? 'auto' : 'smooth' }); };
+    var prev = document.getElementById('carPrev');
+    var next = document.getElementById('carNext');
+    if (prev) prev.addEventListener('click', function () { ir(-1); });
+    if (next) next.addEventListener('click', function () { ir(1); });
+    dots.querySelectorAll('span').forEach(function (d, k) {
+      d.addEventListener('click', function () { car.scrollTo({ left: k * paso(), behavior: reduce ? 'auto' : 'smooth' }); });
+    });
+    car.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); ir(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); ir(-1); }
+    });
+    var arrastrando = false, movido = false, x0 = 0, s0 = 0;
+    car.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      arrastrando = true; movido = false; x0 = e.clientX; s0 = car.scrollLeft;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!arrastrando) return;
+      var dx = e.clientX - x0;
+      if (Math.abs(dx) > 5 && !movido) { movido = true; car.classList.add('arrastrando'); }
+      if (movido) car.scrollLeft = s0 - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!arrastrando) return;
+      arrastrando = false;
+      if (movido) {
+        car.classList.remove('arrastrando');
+        car.scrollTo({ left: Math.round(car.scrollLeft / paso()) * paso(), behavior: 'smooth' });
+      }
+    });
+    car.addEventListener('dragstart', function (e) { e.preventDefault(); });
     var revisar = function () {
       cards.forEach(function (c) {
         var body = c.querySelector('.msg-body');
@@ -101,7 +136,12 @@
       setTimeout(function () { lb.hidden = true; }, 250);
       if (ultimo) ultimo.focus();
     };
-    cards.forEach(function (c) { c.addEventListener('click', function () { abrir(c); }); });
+    cards.forEach(function (c) {
+      c.addEventListener('click', function (e) {
+        if (movido) { e.preventDefault(); movido = false; return; } // fue un arrastre, no un clic
+        abrir(c);
+      });
+    });
     lb.addEventListener('click', cerrar);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) cerrar(); });
   }
