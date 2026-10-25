@@ -48,19 +48,19 @@ ul,ol{padding:0;list-style:none}
 .m5{background:rgba(142,146,104,.35);bottom:-200px;left:30%}
 .m6{background:rgba(217,211,194,.70);top:-180px;right:10%}
 .bf-fondo{position:absolute;opacity:.14;animation:flotar 9s ease-in-out infinite}
-.b1{width:262px;top:12%;right:4%;transform:rotate(8deg)}
-.b2{width:300px;top:46%;left:3%;transform:rotate(-12deg);animation-delay:-3s}
-.b3{width:230px;top:72%;right:6%;transform:rotate(14deg);animation-delay:-6s}
-.b4{width:200px;top:88%;left:8%;transform:rotate(-6deg);animation-delay:-1.5s}
+.b1{width:110px;top:12%;right:4%;transform:rotate(8deg)}
+.b2{width:120px;top:46%;left:3%;transform:rotate(-12deg);animation-delay:-3s}
+.b3{width:96px;top:72%;right:6%;transform:rotate(14deg);animation-delay:-6s}
+.b4{width:86px;top:88%;left:8%;transform:rotate(-6deg);animation-delay:-1.5s}
 @keyframes flotar{0%,100%{translate:0 0}50%{translate:0 -14px}}
-@media (max-width:900px){.bf-fondo{width:150px!important;opacity:.10}.b2,.b4{display:none}}
+@media (max-width:900px){.bf-fondo{width:72px!important;opacity:.12}.b2,.b4{display:none}}
 
 /* ---------- Columna ---------- */
 .columna{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:20px 16px 48px}
 
 /* ---------- Barra superior ---------- */
 .barra{
-  position:sticky;top:12px;z-index:20;
+  position:relative;z-index:20;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:10px 12px 10px 18px;margin-bottom:16px;
   background:rgba(247,245,239,.55);border:1px solid rgba(255,255,255,.8);border-radius:999px;
@@ -319,7 +319,6 @@ ul,ol{padding:0;list-style:none}
 @media (max-width:520px){
   body{font-size:14.5px}
   .columna{padding:12px 12px 40px}
-  .barra{top:8px}
   .seccion{padding:24px 18px}
   .perfil{padding:28px 16px}
   .nombre{font-size:32px}
